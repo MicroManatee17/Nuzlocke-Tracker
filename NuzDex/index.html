@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Radical Red Nuzlocke Tool</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <h1>Radical Red Nuzlocke Companion</h1>
+</header>
+
+<div id="coverage-tooltip" class="coverage-tooltip" style="display:none;"></div>
+
+<main>
+  <!-- HOME -->
+  <section id="home" class="screen">
+    <h2>Dex Lookup</h2>
+
+    <label>Pokémon</label>
+    <input list="pokemon-list" id="dex-pokemon" placeholder="Search Pokémon">
+
+    <label>Moves</label>
+    <input list="move-list" id="dex-moves" placeholder="Search Move">
+
+    <label>Abilities</label>
+    <input list="ability-list" id="dex-abilities" placeholder="Search Ability">
+
+    <label>Items</label>
+    <input list="item-list" id="dex-items" placeholder="Search Item">
+  </section>
+
+  <!-- PARTY -->
+  <section id="party" class="screen" style="display:none;">
+    <h2>Your Party</h2>
+    <div id="party-container"></div>
+  </section>
+
+  <!-- CAUGHT -->
+  <section id="caught" class="screen" style="display:none;">
+    <h2>Route Encounters</h2>
+
+    <label>Route</label>
+    <input list="route-list" id="route-name" placeholder="Route">
+
+    <label>Pokémon</label>
+    <input list="pokemon-list" id="caught-pokemon" placeholder="Pokémon">
+
+    <label>Ability</label>
+    <input list="ability-list" id="caught-ability" placeholder="Ability">
+
+    <button onclick="addCaught()">Add Encounter</button>
+
+    <ul id="caught-list"></ul>
+  </section>
+
+<!-- COVERAGE -->
+<section id="coverage" class="screen" style="display:none;">
+  <h2>Party Coverage</h2>
+
+  <!-- TYPE CHART -->
+  <div id="coverage-tab">
+    <h3>Type Chart (Hover to see super-effective moves)</h3>
+    <div id="coverage-grid" class="type-chart-grid"></div>
+    <div id="coverage-tooltip" class="coverage-tooltip" style="display:none;"></div>
+
+    <hr>
+
+    <!-- CUSTOM TYPE COVERAGE -->
+    <h3>Custom Type Coverage</h3>
+    <div class="custom-coverage-controls">
+      <label>
+        Type 1:
+        <select id="custom-type1">
+          <option value="">--None--</option>
+        </select>
+      </label>
+      <label>
+        Type 2:
+        <select id="custom-type2">
+          <option value="">--None--</option>
+        </select>
+      </label>
+      <button id="update-custom-coverage">Update Coverage</button>
+    </div>
+    <div id="custom-coverage-grid" class="custom-coverage-grid"></div>
+  </div>
+</section>
+
+
+  <!-- DAMAGE -->
+<section id="damage" class="screen" style="display:none;">
+  <h2>Damage Calculator</h2>
+
+  <div class="damage-container">
+
+    <!-- ================== ATTACKER ================== -->
+    <div class="damage-side">
+      <h3>Attacker</h3>
+
+      <label>Pokémon</label>
+      <input list="pokemon-list" id="calc-attacker" placeholder="Attacker">
+
+      <label>Level</label>
+      <input type="number" id="calc-level-atk" value="50" min="1" max="100">
+
+      <label>Nature</label>
+      <select id="calc-nature-atk">
+        <option value="neutral">Neutral</option>
+        <option value="adamant">Adamant</option>
+        <option value="modest">Modest</option>
+        <option value="jolly">Jolly</option>
+        <option value="timid">Timid</option>
+        <option value="bold">Bold</option>
+        <option value="calm">Calm</option>
+        <option value="careful">Careful</option>
+        <option value="impish">Impish</option>
+      </select>
+
+      <h4>Stats</h4>
+
+      <div class="stat-table">
+        <div class="stat-header">Stat</div>
+        <div class="stat-header">Base</div>
+        <div class="stat-header">IV</div>
+        <div class="stat-header">EV</div>
+        <div class="stat-header">Stage</div>
+        <div class="stat-header">Total</div>
+
+        <!-- HP -->
+        <div class="stat-name">HP</div>
+        <span id="base-hp-atk">0</span>
+        <input type="number" id="iv-hp-atk" value="31" min="0" max="31">
+        <input type="number" id="ev-hp-atk" value="0" min="0" max="255">
+        <span>—</span>
+        <span id="total-hp-atk">0</span>
+
+        <!-- Attack -->
+        <div class="stat-name">Atk</div>
+        <span id="base-atk-atk">0</span>
+        <input type="number" id="iv-atk-atk" value="31" min="0" max="31">
+        <input type="number" id="ev-atk-atk" value="0" min="0" max="255">
+        <select id="stage-atk">
+          <option value="-6">-6</option><option value="-5">-5</option>
+          <option value="-4">-4</option><option value="-3">-3</option>
+          <option value="-2">-2</option><option value="-1">-1</option>
+          <option value="0" selected>0</option>
+          <option value="1">+1</option><option value="2">+2</option>
+          <option value="3">+3</option><option value="4">+4</option>
+          <option value="5">+5</option><option value="6">+6</option>
+        </select>
+        <span id="total-atk-atk">0</span>
+
+        <!-- Defense -->
+        <div class="stat-name">Def</div>
+        <span id="base-def-atk">0</span>
+        <input type="number" id="iv-def-atk" value="31" min="0" max="31">
+        <input type="number" id="ev-def-atk" value="0" min="0" max="255">
+        <select id="stage-def-atk">
+          <option value="-6">-6</option><option value="-5">-5</option>
+          <option value="-4">-4</option><option value="-3">-3</option>
+          <option value="-2">-2</option><option value="-1">-1</option>
+          <option value="0" selected>0</option>
+          <option value="1">+1</option><option value="2">+2</option>
+          <option value="3">+3</option><option value="4">+4</option>
+          <option value="5">+5</option><option value="6">+6</option>
+        </select>
+        <span id="total-def-atk">0</span>
+
+        <!-- SpAtk -->
+        <div class="stat-name">SpA</div>
+        <span id="base-spatk-atk">0</span>
+        <input type="number" id="iv-spatk-atk" value="31" min="0" max="31">
+        <input type="number" id="ev-spatk-atk" value="0" min="0" max="255">
+        <select id="stage-spatk-atk">
+          <option value="-6">-6</option><option value="-5">-5</option>
+          <option value="-4">-4</option><option value="-3">-3</option>
+          <option value="-2">-2</option><option value="-1">-1</option>
+          <option value="0" selected>0</option>
+          <option value="1">+1</option><option value="2">+2</option>
+          <option value="3">+3</option><option value="4">+4</option>
+          <option value="5">+5</option><option value="6">+6</option>
+        </select>
+        <span id="total-spatk-atk">0</span>
+
+        <!-- SpDef -->
+        <div class="stat-name">SpD</div>
+        <span id="base-spdef-atk">0</span>
+        <input type="number" id="iv-spdef-atk" value="31" min="0" max="31">
+        <input type="number" id="ev-spdef-atk" value="0" min="0" max="255">
+        <select id="stage-spdef-atk">
+          <option value="-6">-6</option><option value="-5">-5</option>
+          <option value="-4">-4</option><option value="-3">-3</option>
+          <option value="-2">-2</option><option value="-1">-1</option>
+          <option value="0" selected>0</option>
+          <option value="1">+1</option><option value="2">+2</option>
+          <option value="3">+3</option><option value="4">+4</option>
+          <option value="5">+5</option><option value="6">+6</option>
+        </select>
+        <span id="total-spdef-atk">0</span>
+
+        <!-- Speed -->
+        <div class="stat-name">Spe</div>
+        <span id="base-speed-atk">0</span>
+        <input type="number" id="iv-speed-atk" value="31" min="0" max="31">
+        <input type="number" id="ev-speed-atk" value="0" min="0" max="255">
+        <select id="stage-speed-atk">
+          <option value="-6">-6</option><option value="-5">-5</option>
+          <option value="-4">-4</option><option value="-3">-3</option>
+          <option value="-2">-2</option><option value="-1">-1</option>
+          <option value="0" selected>0</option>
+          <option value="1">+1</option><option value="2">+2</option>
+          <option value="3">+3</option><option value="4">+4</option>
+          <option value="5">+5</option><option value="6">+6</option>
+        </select>
+        <span id="total-speed-atk">0</span>
+
+      </div>
+    </div>
+
+    <!-- ================== DEFENDER ================== -->
+    <div class="damage-side">
+      <h3>Defender</h3>
+
+      <label>Pokémon</label>
+      <input list="pokemon-list" id="calc-defender" placeholder="Defender">
+
+      <label>Level</label>
+      <input type="number" id="calc-level-def" value="50" min="1" max="100">
+
+      <label>Nature</label>
+      <select id="calc-nature-def">
+        <option value="neutral">Neutral</option>
+        <option value="bold">Bold</option>
+        <option value="calm">Calm</option>
+        <option value="careful">Careful</option>
+        <option value="impish">Impish</option>
+        <option value="relaxed">Relaxed</option>
+        <option value="sassy">Sassy</option>
+      </select>
+
+      <h4>Stats</h4>
+
+      <div class="stat-table">
+        <div class="stat-header">Stat</div>
+        <div class="stat-header">Base</div>
+        <div class="stat-header">IV</div>
+        <div class="stat-header">EV</div>
+        <div class="stat-header">Stage</div>
+        <div class="stat-header">Total</div>
+
+        <!-- Same stat rows but with -def IDs -->
+        <!-- HP -->
+        <div class="stat-name">HP</div>
+        <span id="base-hp-def">0</span>
+        <input type="number" id="iv-hp-def" value="31" min="0" max="31">
+        <input type="number" id="ev-hp-def" value="0" min="0" max="255">
+        <span>—</span>
+        <span id="total-hp-def">0</span>
+
+        <!-- Defense -->
+        <div class="stat-name">Def</div>
+        <span id="base-def-def">0</span>
+        <input type="number" id="iv-def-def" value="31" min="0" max="31">
+        <input type="number" id="ev-def-def" value="0" min="0" max="255">
+        <select id="stage-def-def">
+          <option value="-6">-6</option><option value="-5">-5</option>
+          <option value="-4">-4</option><option value="-3">-3</option>
+          <option value="-2">-2</option><option value="-1">-1</option>
+          <option value="0" selected>0</option>
+          <option value="1">+1</option><option value="2">+2</option>
+          <option value="3">+3</option><option value="4">+4</option>
+          <option value="5">+5</option><option value="6">+6</option>
+        </select>
+        <span id="total-def-def">0</span>
+
+        <!-- SpDef -->
+        <div class="stat-name">SpD</div>
+        <span id="base-spdef-def">0</span>
+        <input type="number" id="iv-spdef-def" value="31" min="0" max="31">
+        <input type="number" id="ev-spdef-def" value="0" min="0" max="255">
+        <select id="stage-spdef-def">
+          <option value="-6">-6</option><option value="-5">-5</option>
+          <option value="-4">-4</option><option value="-3">-3</option>
+          <option value="-2">-2</option><option value="-1">-1</option>
+          <option value="0" selected>0</option>
+          <option value="1">+1</option><option value="2">+2</option>
+          <option value="3">+3</option><option value="4">+4</option>
+          <option value="5">+5</option><option value="6">+6</option>
+        </select>
+        <span id="total-spdef-def">0</span>
+
+        <!-- Speed -->
+        <div class="stat-name">Spe</div>
+        <span id="base-speed-def">0</span>
+        <input type="number" id="iv-speed-def" value="31" min="0" max="31">
+        <input type="number" id="ev-speed-def" value="0" min="0" max="255">
+        <select id="stage-speed-def">
+          <option value="-6">-6</option><option value="-5">-5</option>
+          <option value="-4">-4</option><option value="-3">-3</option>
+          <option value="-2">-2</option><option value="-1">-1</option>
+          <option value="0" selected>0</option>
+          <option value="1">+1</option><option value="2">+2</option>
+          <option value="3">+3</option><option value="4">+4</option>
+          <option value="5">+5</option><option value="6">+6</option>
+        </select>
+        <span id="total-speed-def">0</span>
+
+      </div>
+    </div>
+  </div>
+
+  <label>Move</label>
+  <input list="move-list" id="calc-move" placeholder="Move">
+
+  <label>Weather</label>
+  <select id="calc-weather">
+    <option value="">None</option>
+    <option value="sun">Sun</option>
+    <option value="rain">Rain</option>
+    <option value="sand">Sand</option>
+    <option value="hail">Hail</option>
+  </select>
+
+  <label>Terrain</label>
+  <select id="calc-terrain">
+    <option value="">None</option>
+    <option value="electric">Electric</option>
+    <option value="grassy">Grassy</option>
+    <option value="psychic">Psychic</option>
+    <option value="misty">Misty</option>
+  </select>
+
+  <button onclick="runCalc()">Calculate</button>
+
+  <div id="calc-result"></div>
+</section>
+
+
+
+</main>
+
+<footer>
+  <button onclick="showTab('home')">Home</button>
+  <button onclick="showTab('party')">Party</button>
+  <button onclick="showTab('caught')">Caught</button>
+  <button onclick="showTab('coverage')">Coverage</button>
+  <button onclick="showTab('damage')">Damage</button>
+</footer>
+
+
+
+<script src="data/pokemon.js"></script>
+<script src="data/moves.js"></script>
+<script src="data/abilities.js"></script>
+<script src="data/items.js"></script>
+<script src="data/routes.js"></script>
+<script src="data/moveData.js"></script>
+
+<datalist id="pokemon-list"></datalist>
+<datalist id="move-list"></datalist>
+<datalist id="ability-list"></datalist>
+<datalist id="item-list"></datalist>
+<datalist id="route-list"></datalist>
+
+<script src="app.js"></script>
+
+
+</body>
+</html>
