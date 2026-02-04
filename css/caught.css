@@ -1,0 +1,11 @@
+#caught-list {
+  list-style: none;
+}
+
+#caught-list li {
+  margin-bottom: 0.5rem;
+}
+
+#caught-list button {
+  margin-left: 0.5rem;
+}

@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <title>Radical Red Nuzlocke Tool</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/party.css">
+  <link rel="stylesheet" href="css/caught.css">
+  <link rel="stylesheet" href="css/coverage.css">
+  <link rel="stylesheet" href="css/damage.css">
+
 </head>
 <body>
 
@@ -14,22 +20,39 @@
 <div id="coverage-tooltip" class="coverage-tooltip" style="display:none;"></div>
 
 <main>
-  <!-- HOME -->
-  <section id="home" class="screen">
-    <h2>Dex Lookup</h2>
+<!-- ==================== HOME TAB ==================== -->
+<section id="home" class="screen" style="display:none;">
 
-    <label>Pokémon</label>
-    <input list="pokemon-list" id="dex-pokemon" placeholder="Search Pokémon">
+  <h2>Search the Pokédex</h2>
 
-    <label>Moves</label>
-    <input list="move-list" id="dex-moves" placeholder="Search Move">
+  <div class="home-controls">
+    <!-- Category Selector -->
+    <select id="home-category">
+      <option value="pokemon">Pokémon</option>
+      <option value="move">Move</option>
+      <option value="item">Item</option>
+      <option value="ability">Ability</option>
+    </select>
 
-    <label>Abilities</label>
-    <input list="ability-list" id="dex-abilities" placeholder="Search Ability">
+    <!-- Search Dropdown -->
+    <div class="custom-dropdown" id="home-search-container">
+      <input
+        type="text"
+        id="home-search-input"
+        placeholder="Search Pokémon..."
+        autocomplete="off"
+      />
+      <div class="dropdown-options" id="home-search-options"></div>
+    </div>
+  </div>
 
-    <label>Items</label>
-    <input list="item-list" id="dex-items" placeholder="Search Item">
-  </section>
+  <!-- Info Display -->
+  <div id="home-info-display" class="home-info">
+    <p>Select something to see details.</p>
+  </div>
+
+</section>
+
 
   <!-- PARTY -->
   <section id="party" class="screen" style="display:none;">
@@ -341,22 +364,14 @@
 
 </main>
 
-<footer>
+<div id="tab-bar">
   <button onclick="showTab('home')">Home</button>
   <button onclick="showTab('party')">Party</button>
   <button onclick="showTab('caught')">Caught</button>
   <button onclick="showTab('coverage')">Coverage</button>
   <button onclick="showTab('damage')">Damage</button>
-</footer>
+</div>
 
-
-
-<script src="data/pokemon.js"></script>
-<script src="data/moves.js"></script>
-<script src="data/abilities.js"></script>
-<script src="data/items.js"></script>
-<script src="data/routes.js"></script>
-<script src="data/moveData.js"></script>
 
 <datalist id="pokemon-list"></datalist>
 <datalist id="move-list"></datalist>
@@ -364,9 +379,33 @@
 <datalist id="item-list"></datalist>
 <datalist id="route-list"></datalist>
 
-<script src="app.js"></script>
+<!-- DATA -->
+<script src="data/pokemon.js"></script>
+<script src="data/moves.js"></script>
+<script src="data/abilities.js"></script>
+<script src="data/items.js"></script>
+<script src="data/routes.js"></script>
+
+<!-- CORE -->
+<script src="js/core/constants.js"></script>
+<script src="js/core/state.js"></script>
+
+<!-- UTILS -->
+<script src="js/utils/fuzzy.js"></script>
+<script src="js/utils/stats.js"></script>
+
+<!-- TABS -->
+<script src="js/tabs/home.js"></script>
+<script src="js/tabs/party.js"></script>
+<script src="js/tabs/caught.js"></script>
+<script src="js/tabs/coverage.js"></script>
+<script src="js/tabs/damage.js"></script>
+
+<!-- NAV + INIT -->
+<script src="js/core/navigation.js"></script>
+<script src="js/core/init.js"></script>
+
 
 
 </body>
 </html>
-

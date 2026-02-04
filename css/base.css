@@ -1,0 +1,142 @@
+/* =======================
+   BASE RESET & GLOBALS
+======================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #1f1f1f; /* Dark gray */
+  color: #eaeaea;
+  min-height: 100vh;
+}
+
+.screen {
+  display: none;
+  padding: 1rem;
+  padding-bottom: 4.75rem; /* space for bottom banner */
+}
+
+/* =======================
+   HEADER / TOP BANNER
+======================= */
+
+header {
+  background-color: #7a0f0f; /* Dark red */
+  color: #ffffff;
+  padding: 1rem;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #500a0a;
+}
+
+header h1 {
+  font-size: 1.4rem;
+}
+
+/* =======================
+   BOTTOM TAB BANNER
+======================= */
+
+#tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3.75rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: #7a0f0f; /* Same as header */
+  border-top: 2px solid #500a0a;
+  z-index: 1000;
+}
+
+#tab-bar button {
+  flex: 1;
+  height: 100%;
+
+  background: none;
+  border: none;
+
+  color: #f0f0f0;
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 0.4px;
+
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+/* Hover = subtle darkening */
+#tab-bar button:hover {
+  background-color: #641010;
+}
+
+/* Active tab = slightly brighter */
+#tab-bar button.active {
+  background-color: #9a1a1a;
+}
+
+/* =======================
+   INPUTS & DROPDOWNS
+======================= */
+
+input,
+select {
+  background-color: #2b2b2b;
+  color: #eeeeee;
+  border: 1px solid #555;
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+}
+
+input::placeholder {
+  color: #999;
+}
+
+/* =======================
+   GENERIC BUTTONS
+======================= */
+
+button {
+  background-color: #444;
+  color: white;
+  border-radius: 6px;
+  padding: 0.4rem 0.7rem;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #666;
+}
+
+/* =======================
+   UTILITY CLASSES
+======================= */
+
+.muted {
+  color: #999;
+}
+
+.option {
+  padding: 0.3rem 0.5rem;
+  cursor: pointer;
+}
+
+.option:hover {
+  background-color: #333;
+}
+
+.move-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}

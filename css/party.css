@@ -1,0 +1,151 @@
+/* ------------------ PARTY CARD ------------------ */
+.party-card {
+  display: flex;
+  gap: 1rem;
+  padding: 0.75rem;
+  border-radius: 10px;
+  flex-wrap: wrap;
+
+  /* Fancy type gradient */
+  background: linear-gradient(
+    135deg,
+    var(--type-color-1, #2a2a2a),
+    var(--type-color-2, var(--type-color-1, #2a2a2a))
+  );
+
+  /* Slight overlay so text stays readable */
+  box-shadow: inset 0 0 0 9999px rgba(0, 0, 0, 0.25);
+}
+
+.pokemon-search {
+  width: 100%;
+  margin-bottom: 0.4rem;
+  padding: 0.35rem;
+  border-radius: 6px;
+}
+
+.party-left {
+  flex: 1 1 150px; /* sprite, types, ability, item */
+  min-width: 150px;
+}
+
+.party-middle {
+  flex: 1 1 200px; /* stats panel */
+}
+
+.party-right {
+  flex: 1 1 120px; /* moves column */
+  min-width: 120px;
+}
+
+
+/* ------------------ LEFT SIDE ------------------ */
+.party-left input {
+  background-color: #fff;
+  color: #000;
+  border-radius: 6px;
+  padding: 0.3rem 0.5rem;
+}
+
+.party-left .remove-btn {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+.party-left .remove-btn:hover {
+  background-color: #c0392b;
+}
+
+/* ✅ SPRITE SIZE (safe + isolated) */
+.party-card .sprite {
+  width: 100px;
+  height: 100px;
+  image-rendering: pixelated;
+  margin-bottom: 0.25rem;
+}
+
+.party-left .type-icons {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.type-icon {
+  width: 24px;
+  height: 24px;
+}
+
+
+/* ------------------ STAT PANEL ------------------ */
+.stat-panel {
+  background-color: #1f1f1f;
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: 40px 1fr 36px;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.stat-name {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 0.75rem;
+}
+
+.stat-bar-container {
+  background-color: #333;
+  border-radius: 4px;
+  overflow: hidden;
+  height: 8px;
+}
+
+.stat-bar {
+  height: 100%;
+  transition: width 0.25s ease, background-color 0.25s ease;
+}
+
+.stat-value {
+  font-size: 0.75rem;
+  text-align: right;
+}
+
+.bst-row {
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+  padding-top: 0.3rem;
+  border-top: 1px solid #444;
+}
+
+.bst-bar-container {
+  background-color: #333;
+  border-radius: 4px;
+  height: 10px;
+  overflow: hidden;
+}
+
+.bst-bar {
+  height: 100%;
+  transition: width 0.25s ease, background-color 0.25s ease;
+}
+
+.bst-value {
+  font-weight: bold;
+  text-align: right;
+}
+
+
+/* ------------------ RIGHT SIDE MOVES ------------------ */
+.party-right input {
+  background-color: #fff;
+  color: #000;
+  border-radius: 6px;
+  padding: 0.3rem 0.5rem;
+  margin-bottom: 0.2rem;
+}

@@ -1,0 +1,18 @@
+#home-search-options {
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  width: 200px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 100;
+  display: none;
+}
+
+#home-info-display h3 {
+  margin-bottom: 0.5rem;
+}
+
+#home-info-display p {
+  margin-bottom: 0.3rem;
+}

@@ -1,0 +1,29 @@
+#coverage-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(3, 50px);
+  gap: 0.25rem;
+}
+
+.type-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.coverage-tooltip {
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  z-index: 100;
+  display: none;
+}
+
+.coverage-row {
+  margin-bottom: 0.25rem;
+}
